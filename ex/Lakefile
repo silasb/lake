@@ -1,0 +1,14 @@
+-- example lua Lakefile
+
+-- task named docs with deps on "clean" and "dist-clean"
+-- task({"docs": ["clean", "dist-clean"]}, func)
+
+-- sets up the default task
+-- task({default = "build"})
+
+task({default = "build"}, "print('default build command')")
+
+func = [[
+print('hello k')
+]]
+task("build2", func)

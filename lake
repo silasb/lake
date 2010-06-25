@@ -1,0 +1,16 @@
+#!/Users/silas/Downloads/lua-5.1.4/src/lua
+
+require 'lake'
+
+--table.foreach(arg, print)
+
+if exists 'Lakefile' then
+	dofile 'Lakefile'
+end
+
+if #arg < 1 and default_command == nil then
+	print_help()
+end
+
+f_arg = assert(arg[1] or default_command)
+run_command(f_arg)
