@@ -1,4 +1,4 @@
-#!/Users/silas/Downloads/lua-5.1.4/src/lua
+#!/usr/bin/env lua
 
 require 'lake'
 
