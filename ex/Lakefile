@@ -6,7 +6,17 @@
 -- sets up the default task
 -- task({default = "build"})
 
-task({default = "build"}, "print('default build command')")
+task({default = "build"}, [[
+  print('default build command')
+]])
+
+task({build3 = "clean"}, [[
+  print("building build3")
+]])
+
+task("clean", [[
+  print("cleaning")
+]])
 
 func = [[
 print('hello k')

@@ -4,15 +4,23 @@
 VERSION = 0.01
 
 commands = {}
+deps = {}
 
 default_command = nil
 
 -- very redundant function
 function task(name, command)
 	if type(name) == "table" then
-		default_command = assert(name['default'])
-		--print(default_command)
-		commands[default_command] = assert(loadstring(command))
+	  if name['default'] then
+      default_command = name['default']
+      --print(default_command)
+      commands[default_command] = assert(loadstring(command))
+    else
+      for k,v in pairs(name) do
+        commands[k] = assert(loadstring(command))
+        deps[k] = v
+      end
+    end
 	else
 		commands[name] = assert(loadstring(command))
 		--print("command loaded " .. name)
@@ -36,7 +44,10 @@ end
 
 -- internal
 function run_command(name)
-	commands[name]()
+  if deps[name] ~= nil then
+    run_command(deps[name])
+  end
+  commands[name]()
 end
 
 -- not used
